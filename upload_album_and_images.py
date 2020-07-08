@@ -4,15 +4,18 @@ import os
 from os import listdir
 from os.path import isfile, join
 import zipfile
+import shutil
 
-headers = {'Content-type': 'application/json'}
 base_url = "http://127.0.0.1:5000/api"
 s = requests.Session()
 data = {"username": "user", "password": "user"}
+
+### Login
 r = s.post(f"{base_url}/login", json=data)
 
+## Print cookies
 # print(s.cookies)
-# print(r)
+## Testing:
 # r = s.get("http://127.0.0.1:5000/api/user/me")
 # print(r.json())
 
@@ -49,51 +52,5 @@ for album_folder in list_album:
                 files = {'fieldName': open(join(images_path, img_path), 'rb')}
                 r = s.post(f"{base_url}/user/albums/{album_id}/photos", files=files)
 
-
-
-
-
-# apparent_encoding 	
-# Returns the apparent encoding
-# close() 	
-# Closes the connection to the server
-# content 	
-# Returns the content of the response, in bytes
-# cookies 	
-# Returns a CookieJar object with the cookies sent back from the server
-# elapsed 	
-# Returns a timedelta object with the time elapsed from sending the request to the arrival of the response
-# encoding 	
-# Returns the encoding used to decode r.text
-# headers 	
-# Returns a dictionary of response headers
-# history 	
-# Returns a list of response objects holding the history of request (url)
-# is_permanent_redirect 	
-# Returns True if the response is the permanent redirected url, otherwise False
-# is_redirect 	
-# Returns True if the response was redirected, otherwise False
-# iter_content() 	
-# Iterates over the response
-# iter_lines() 	
-# Iterates over the lines of the response
-# json() 	
-# Returns a JSON object of the result (if the result was written in JSON format, if not it raises an error)
-# links 	
-# Returns the header links
-# next 	
-# Returns a PreparedRequest object for the next request in a redirection
-# ok 	
-# Returns True if status_code is less than 200, otherwise False
-# raise_for_status() 	
-# If an error occur, this method returns a HTTPError object
-# reason 	
-# Returns a text corresponding to the status code
-# request 	
-# Returns the request object that requested this response
-# status_code 	
-# Returns a number that indicates the status (200 is OK, 404 is Not Found)
-# text 	
-# Returns the content of the response, in unicode
-# url 	
-# Returns the URL of the response
+    ### TODO: remove extracted data
+    # shutil.rmtree(join(id_path, album_folder))
